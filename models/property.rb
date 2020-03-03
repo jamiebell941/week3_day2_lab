@@ -86,8 +86,8 @@ class Property
     db = PG.connect({dbname: 'property_tracker', host:'localhost'})
     sql = "SELECT * FROM properties WHERE address = $1"
     values = [address]
-    db.prepare("find", sql)
-    houses = db.exec_prepared("find", values)
+    db.prepare("find_by_address", sql)
+    houses = db.exec_prepared("find_by_address", values)
     db.close
     return houses.map { |house| Property.new(house) } if houses.any?
   end
